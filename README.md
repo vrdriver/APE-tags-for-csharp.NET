@@ -1,8 +1,8 @@
 # APE Tags for C#.NET
-This is a library for C#.NET to manipulate (**CRUD**) APEv2 tags in various files.
+This is a library for C#.NET to manipulate (**CRUD**) [APEv2 Metadata tags](https://wiki.hydrogenaud.io/index.php?title=APEv2_specification) in various files.
 It was translated from the LGPLv2 licenced [Audio Tools Library](http://mac.sourceforge.net/atl/ "Audio Tools Library"), and therefore I have continued the licence, as I hadn't found any **_standalone_** C#.NET libraries that were working APE tags. Things may or may not be the same as the original code with the same functionality though, or follow the same library methods.
 
-You are not restricted in the media file formats you can write and read. This is only restricted at your own discretion, as I have not extensively tested this code. 
+You are not restricted in the media file formats you can write and read. This is only restricted at your own discretion (and yes, I have even tried adding and reading and writing to a plain text file of which it worked). 
 
 USING THIS CODE YOU AGREE TO USE AT YOUR OWN RISK AND THAT YOU TAKE FULL RESPONSIBILITY WHICH STEMS FROM ANYTHING THAT COMES FROM USING IT.
 

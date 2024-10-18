@@ -40,8 +40,22 @@ With this method, you can **read** all the tags at once too rather having to gue
         Debug.WriteLine($"{field.Key}: {valueAsText}");                            
     }
 	
-You can can also **write** tags individually as well.
+You can can also **update** tags individually as well.
 
 
 
     FileTag.UpdateField("Title", Encoding.UTF8.GetBytes(TitleEdit.Text));
+
+To **delete** a single tag:
+
+
+    RemoveTag("TITLE", fileName);
+To **delete all** of the tags
+
+
+     RemoveAllTags(fileName);
+
+To create a tag you can use the following:
+
+
+    AddTag("TITLE", "My Cool Song", fileName);

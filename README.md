@@ -1,10 +1,13 @@
 # APE Tags for C#.NET
 This is a library for C#.NET to manipulate (**CRUD**) APEv2 tags in various files.
-It was translated from the LGPLv2 licenced [Audio Tools Library](http://mac.sourceforge.net/atl/ "Audio Tools Library"), and therefore I have continued the licence, as I hadn't found any standalone C#.NET libraries that were working APE tags.
+It was translated from the LGPLv2 licenced [Audio Tools Library](http://mac.sourceforge.net/atl/ "Audio Tools Library"), and therefore I have continued the licence, as I hadn't found any **_standalone_** C#.NET libraries that were working APE tags. Things may or may not be the same as the original code with the same functionality though, or follow the same library methods.
 
 You are not restricted in the media file formats you can write and read. This is only restricted at your own discretion, as I have not extensively tested this code. 
 
 USING THIS CODE YOU AGREE TO USE AT YOUR OWN RISK AND THAT YOU TAKE FULL RESPONSIBILITY WHICH STEMS FROM ANYTHING THAT COMES FROM USING IT,
+
+![image](https://github.com/user-attachments/assets/df21e609-491f-443a-8f43-506fe81ebc30)
+
 
 This code writes all tags at once, rather than individually (unlike https://github.com/vrdriver/tag), so it will increase write speeds, 
 

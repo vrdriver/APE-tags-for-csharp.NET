@@ -2,6 +2,10 @@
 This is a library for C#.NET to manipulate (**CRUD**) [APEv2 Metadata tags](https://wiki.hydrogenaud.io/index.php?title=APEv2_specification) in various files.
 It was translated from the LGPLv2 licenced [Audio Tools Library](http://mac.sourceforge.net/atl/ "Audio Tools Library"), and therefore I have continued the licence, as I hadn't found any **_standalone_** C#.NET libraries that were working APE tags. Things may or may not be the same as the original code with the same functionality though, or follow the same library methods.
 
+The big question is why do this when TagLib-Sharp or NAudio can do similar?
+Both projects cater for so many different formats, and both are large projects, and both do what they do well, but when it comes to the APE tagging, they have limited file support and metadata type support as well which are self imposed, when in fact they dont need to be.
+In short, this library will allow you to write to basically any file (as APEv2 tags tack on to the end of the file - please note, you can break formats of files in doing this too though) and it's very small and has zero dependancies. You don't need to read the frame data of an MP3 file to see the APE metadata, the same with a Vorbis file, or a wma, wave, opus, ogg etc... this purely looks at the tag information.
+
 You are not restricted in the media file formats you can write and read. This is only restricted at your own discretion (and yes, I have even tried adding and reading and writing to a plain text file of which it worked). 
 
 USING THIS CODE YOU AGREE TO USE AT YOUR OWN RISK AND THAT YOU TAKE FULL RESPONSIBILITY WHICH STEMS FROM ANYTHING THAT COMES FROM USING IT.

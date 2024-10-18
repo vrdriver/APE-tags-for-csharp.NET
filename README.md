@@ -4,7 +4,7 @@ It was translated from the LGPLv2 licenced [Audio Tools Library](http://mac.sour
 
 You are not restricted in the media file formats you can write and read. This is only restricted at your own discretion, as I have not extensively tested this code. 
 
-USING THIS CODE YOU AGREE TO USE AT YOUR OWN RISK AND THAT YOU TAKE FULL RESPONSIBILITY WHICH STEMS FROM ANYTHING THAT COMES FROM USING IT,
+USING THIS CODE YOU AGREE TO USE AT YOUR OWN RISK AND THAT YOU TAKE FULL RESPONSIBILITY WHICH STEMS FROM ANYTHING THAT COMES FROM USING IT.
 
 ![image](https://github.com/user-attachments/assets/df21e609-491f-443a-8f43-506fe81ebc30)
 

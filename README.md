@@ -1,22 +1,23 @@
 # APE Tags for C#.NET
 This is a library for C#.NET to manipulate (**CRUD**) [APEv2 Metadata tags](https://wiki.hydrogenaud.io/index.php?title=APEv2_specification) in various files.
-It was translated from the LGPLv2 licenced [Audio Tools Library](http://mac.sourceforge.net/atl/ "Audio Tools Library"), and therefore I have continued the licence, as I hadn't found any **_standalone_** C#.NET libraries that were working APE tags. Things may or may not be the same as the original code with the same functionality though, or follow the same library methods.
+It was translated from the _LGPLv2 licenced_ [Audio Tools Library](http://mac.sourceforge.net/atl/ "Audio Tools Library"), and therefore I have continued the licence. Prior to this, I hadn't found any **_standalone_** C#.NET libraries that were working with APE tags specifically. Please note, things may or may not be the same as the original code with the same functionality though, or follow the same library methods.
 
-The big question is why do this when TagLib-Sharp or NAudio can do similar?
-Both projects cater for so many different formats, and both are large projects, and both do what they do well, but when it comes to the APE tagging, they have limited file support and metadata type support as well which are self imposed, when in fact they dont need to be.
-In short, this library will allow you to write to basically any file (as APEv2 tags tack on to the end of the file - please note, you can break formats of files in doing this too though) and it's very small and has zero dependancies. You don't need to read the frame data of an MP3 file to see the APE metadata, the same with a Vorbis file, or a wma, wave, opus, ogg etc... this purely looks at the tag information.
+The big question is why do this when TagLib-Sharp, NAudio, JAudioTags, [atldotnet](https://github.com/Zeugma440/atldotnet) can do similar?
+These projects cater for so many different formats, and they do what they do well, but when it comes to the APE tagging, they have limited **file** support and metadata **type** support which seems to be self imposed, when in fact they generally don't need to be.
+In short, as APEv2 tags append to the end of the files, this library _should_ allow you to write to basically any file and it's very small and has zero dependancies. Please note, you can break file formats of files in doing this too, so you have been warned. Having said that, you don't need to read the frame data of an MP3 file to see the APE metadata, the same with a Vorbis file, or a wma, wave, opus, ogg etc... this code purely looks at the tag information at the end of the file.
 
-You are not restricted in the media file formats you can write and read. This is only restricted at your own discretion (and yes, I have even tried adding and reading and writing to a plain text file of which it worked). 
+As mentioned, there is no restriction to the media file formats you can write and read to, if you choose to break a file, that's on you. This is only restricted at your own discretion (and yes, I have even tried adding and reading and writing to a plain text file of which it worked). 
 
 USING THIS CODE YOU AGREE TO USE AT YOUR OWN RISK AND THAT YOU TAKE FULL RESPONSIBILITY WHICH STEMS FROM ANYTHING THAT COMES FROM USING IT.
 
+Here is the sample application.
 ![image](https://github.com/user-attachments/assets/df21e609-491f-443a-8f43-506fe81ebc30)
 
 
-This code writes all tags at once, rather than individually (unlike https://github.com/vrdriver/tag), so it will increase write speeds, 
+This code process is fast and writes all tags at once, rather than individual read and write commands for each tag - unlike [tag](https://github.com/vrdriver/tag).
 
 
-This only has basic options of reading, writing, deleting, updating and creating of the APE tags.
+This library code only has basic options of reading, writing, deleting, updating and creating of the APE tags.
 
 To **create** a tag you can use the following:
 

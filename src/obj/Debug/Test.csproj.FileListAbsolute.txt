@@ -1,0 +1,9 @@
+C:\Users\Stephen Monro\Desktop\delphi2_APE\bin\Debug\Test.exe.config
+C:\Users\Stephen Monro\Desktop\delphi2_APE\bin\Debug\Test.exe
+C:\Users\Stephen Monro\Desktop\delphi2_APE\bin\Debug\Test.pdb
+C:\Users\Stephen Monro\Desktop\delphi2_APE\obj\Debug\Test.csproj.AssemblyReference.cache
+C:\Users\Stephen Monro\Desktop\delphi2_APE\obj\Debug\Test.csproj.GenerateResource.cache
+C:\Users\Stephen Monro\Desktop\delphi2_APE\obj\Debug\Test.csproj.CoreCompileInputs.cache
+C:\Users\Stephen Monro\Desktop\delphi2_APE\obj\Debug\Test.exe
+C:\Users\Stephen Monro\Desktop\delphi2_APE\obj\Debug\Test.pdb
+C:\Users\Stephen Monro\Desktop\delphi2_APE\obj\Debug\Main.MainForm.resources

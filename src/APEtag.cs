@@ -316,16 +316,15 @@ namespace APETag
             public const int APE_VERSION_1_0 = 1000;        // APEv1 version
             public const int APE_VERSION_2_0 = 2000;        // APEv2 version
         }
-         
+          
         public bool WriteTagInFile(string sFile)
         {
             try
             {
-                byte[] ID3 = null;  // ID3v1 tag, if present.
+                byte[] ID3 = null; // ID3v1 tag, if present.
                 int tagSize = APETagUnit.APE_TAG_FOOTER_SIZE;
-                int flags = 0;  // Default field flags.
+                int flags = 0; // Default field flags.
 
-                // Use traditional 'using' statement to ensure MemoryStream is disposed.
                 using (MemoryStream tagData = new MemoryStream())
                 {
                     // Read the existing APEv2 footer if present.
@@ -345,13 +344,11 @@ namespace APETag
                                 sourceFile.Read(ID3, 0, ID3.Length);
                             }
 
-                            // Adjust size if the APEv2 header is included.
                             if ((refFooter.Flags & (1 << 31)) != 0)
                             {
                                 refFooter.Size += APETagUnit.APE_TAG_HEADER_SIZE;
                             }
 
-                            // Truncate the file at the correct position.
                             sourceFile.SetLength(refFooter.FileSize - refFooter.Size - refFooter.DataShift);
                         }
                     }
@@ -359,35 +356,42 @@ namespace APETag
                     // Calculate total tag size including all fields.
                     foreach (var field in Fields ?? Enumerable.Empty<RField>())
                     {
-                        int fieldSize = 8 + field.Name.Length + 1 + field.Value.Length;  // +1 for null terminator.
+                        // Validate the field name and value
+                        string sanitizedFieldName = SanitizeFieldName(field.Name);
+                        byte[] sanitizedValue = SanitizeFieldValue(field.Value);
+
+                        // Recalculate field size based on sanitized data
+                        int fieldSize = 8 + sanitizedFieldName.Length + 1 + sanitizedValue.Length; // +1 for null terminator
                         tagSize += fieldSize;
                     }
 
-                    // Write APEv2 header.
+                    // Write APEv2 header
                     WriteHeaderOrFooter(tagData, tagSize, Fields?.Count() ?? 0, isHeader: true);
 
-                    // Write all tag fields to the stream.
+                    // Write all tag fields to the stream
                     foreach (var field in Fields ?? Enumerable.Empty<RField>())
                     {
-                        byte[] valueBytes = field.Value;  // Assume value is already a byte[].
-                        byte[] nameBytes = Encoding.UTF8.GetBytes(field.Name + '\0');  // Null-terminate field name.
+                        string sanitizedFieldName = SanitizeFieldName(field.Name);
+                        byte[] sanitizedValue = SanitizeFieldValue(field.Value);
 
-                        tagData.Write(BitConverter.GetBytes(valueBytes.Length), 0, 4);  // Write value size (little-endian).
-                        tagData.Write(BitConverter.GetBytes(flags), 0, 4);  // Write field flags.
-                        tagData.Write(nameBytes, 0, nameBytes.Length);  // Write field name.
-                        tagData.Write(valueBytes, 0, valueBytes.Length);  // Write field value.
+                        byte[] nameBytes = Encoding.UTF8.GetBytes(sanitizedFieldName + '\0'); // Null-terminate field name
+
+                        tagData.Write(BitConverter.GetBytes(sanitizedValue.Length), 0, 4); // Write value size (little-endian)
+                        tagData.Write(BitConverter.GetBytes(flags), 0, 4); // Write field flags
+                        tagData.Write(nameBytes, 0, nameBytes.Length); // Write field name
+                        tagData.Write(sanitizedValue, 0, sanitizedValue.Length); // Write field value
                     }
 
-                    // Write APEv2 footer.
+                    // Write APEv2 footer
                     WriteHeaderOrFooter(tagData, tagSize, Fields?.Count() ?? 0, isHeader: false);
 
-                    // Append ID3v1 tag if present.
+                    // Append ID3v1 tag if present
                     if (ID3 != null)
                     {
                         tagData.Write(ID3, 0, ID3.Length);
                     }
 
-                    // Write the tag data to the file.
+                    // Write the tag data to the file
                     using (FileStream sourceFile = new FileStream(sFile, FileMode.Append, FileAccess.Write))
                     {
                         tagData.Seek(0, SeekOrigin.Begin);
@@ -403,7 +407,29 @@ namespace APETag
                 return false;
             }
         }
-        
+
+        // These are just in case a null value is entered inside a field name or value.
+        private string SanitizeFieldName(string fieldName)
+        {
+            if (fieldName.Contains('\0'))
+            {
+                //Debug.WriteLine($"Field name '{fieldName}' contains null bytes and will be sanitized.");
+                fieldName = fieldName.Replace("\0", string.Empty); // Remove null bytes
+            }
+            return fieldName.Trim(); // Trim unnecessary whitespace
+        }
+
+        private byte[] SanitizeFieldValue(byte[] value)
+        {
+            // Replace null bytes with a default value or remove them
+            if (value.Contains((byte)0))
+            {
+                //Debug.WriteLine("Field value contains null bytes and will be sanitized.");
+                value = value.Where(b => b != 0).ToArray();
+            }
+            return value;
+        }
+
 
         private void WriteHeaderOrFooter(MemoryStream stream, int size, int fieldCount, bool isHeader)
         {

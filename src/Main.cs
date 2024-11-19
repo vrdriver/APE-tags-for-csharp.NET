@@ -103,42 +103,42 @@ namespace Main
                 // Only append if the field already exists (or handle logic accordingly)
                 if (!string.IsNullOrEmpty(TitleEdit.Text))
                 {
-                    FileTag.UpdateField("Title", Encoding.UTF8.GetBytes(TitleEdit.Text));
+                    FileTag.UpdateField("Title", Encoding.UTF8.GetBytes(TitleEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(ArtistEdit.Text))
                 {
-                    FileTag.UpdateField("Artist", Encoding.UTF8.GetBytes(ArtistEdit.Text));
+                    FileTag.UpdateField("Artist", Encoding.UTF8.GetBytes(ArtistEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(AlbumEdit.Text))
                 {
-                    FileTag.UpdateField("Album", Encoding.UTF8.GetBytes(AlbumEdit.Text));
+                    FileTag.UpdateField("Album", Encoding.UTF8.GetBytes(AlbumEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(TrackEdit.Text))
                 {
-                    FileTag.UpdateField("Track", Encoding.UTF8.GetBytes(TrackEdit.Text));
+                    FileTag.UpdateField("Track", Encoding.UTF8.GetBytes(TrackEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(YearEdit.Text))
                 {
-                    FileTag.UpdateField("Year", Encoding.UTF8.GetBytes(YearEdit.Text));
+                    FileTag.UpdateField("Year", Encoding.UTF8.GetBytes(YearEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(GenreEdit.Text))
                 {
-                    FileTag.UpdateField("Genre", Encoding.UTF8.GetBytes(GenreEdit.Text));
+                    FileTag.UpdateField("Genre", Encoding.UTF8.GetBytes(GenreEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(CommentEdit.Text))
                 {
-                    FileTag.UpdateField("Comment", Encoding.UTF8.GetBytes(CommentEdit.Text));
+                    FileTag.UpdateField("Comment", Encoding.UTF8.GetBytes(CommentEdit.Text), filename);
                 }
 
                 if (!string.IsNullOrEmpty(CopyrightEdit.Text))
                 {
-                    FileTag.UpdateField("Copyright", Encoding.UTF8.GetBytes(CopyrightEdit.Text));
+                    FileTag.UpdateField("Copyright", Encoding.UTF8.GetBytes(CopyrightEdit.Text), filename);
                 }
             } 
 
@@ -190,7 +190,7 @@ namespace Main
                         byte[] fieldValueBytes = Encoding.UTF8.GetBytes(fieldValue);
 
                         // Update or add the field in the FileTag
-                        FileTag.UpdateField(fieldKey, fieldValueBytes);
+                        FileTag.UpdateField(fieldKey, fieldValueBytes, filename);
                     }
                 }
             }
@@ -283,18 +283,10 @@ namespace Main
                     FileTag.AppendField(field.Key.ToString(), field.Value);
                 }
 
-            }
-             
+            } 
 
             // Append the new tag to the list of fields
-            FileTag.AppendField(tagName, tagValue);
-
-
-
-
-
-
-
+            FileTag.AppendField(tagName, tagValue); 
 
             // Save the updated tag data to the file
             if (!File.Exists(fileName) || !FileTag.WriteTagInFile(fileName))

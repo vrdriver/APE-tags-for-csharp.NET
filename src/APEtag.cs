@@ -484,8 +484,32 @@ namespace APETag
             pField[pField.Length - 1] = new RField { Name = name, Value = value };
         }         
 
-        public void UpdateField(string name, byte[] value)
-        {
+        public void UpdateField(string name, byte[] value, string filename)
+        { 
+
+            if (!ReadFromFile(filename))
+            {
+                // Save tag data
+                if (!System.IO.File.Exists(filename) || !WriteTagInFile(filename))
+                {
+                    // Saving empty tags so we can do the write.             
+                }
+            }
+             
+
+            // Load tag data
+            if (ReadFromFile(filename))
+            {
+                // Read existing tag fields from the file
+                List<KeyValuePair<string, byte[]>> existingFields = ReadAllFromFile(filename);
+
+                // Loop through the existing fields and re-add them using AppendField
+                foreach (var field in existingFields)
+                {
+                    AppendField(field.Key, field.Value);
+                }
+            }
+
             bool fieldExists = false;
 
             // Check if the field exists and update it if found
@@ -502,7 +526,8 @@ namespace APETag
             // If not found, append it
             if (!fieldExists)
             {
-                AppendField(name, value);
+                AppendField(name, value); 
+                Debug.WriteLine("Appended"); 
             }
         }
 
